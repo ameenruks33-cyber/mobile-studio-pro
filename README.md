@@ -1,7 +1,11 @@
 # Mobile Studio Pro
 
-Install from:
+Install on your **phone**:
 
 **https://ameenruks33-cyber.github.io/mobile-studio-pro/**
 
-Download the signed zip, extract, and run `MobileStudioPro.exe`. If Windows SmartScreen still warns, install `MobileStudioPro.cer` into **Trusted Publishers**, then unblock the file in Properties.
+1. Open that URL on the phone.
+2. Tap **Open studio on this phone**, or **Install app**.
+3. iPhone: Safari → Share → Add to Home Screen.
+
+Windows desktop app: https://ameenruks33-cyber.github.io/mobile-studio-pro/windows.html

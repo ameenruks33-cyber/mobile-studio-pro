@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Install Mobile Studio Pro</title>
-  <meta name="description" content="Download Mobile Studio Pro for Windows. Signed studio app for karaoke, mix, and master.">
+  <meta name="description" content="Install Mobile Studio Pro on your phone. Record, mix, reverb, and export.">
+  <meta name="theme-color" content="#e85d04">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Studio Pro">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <style>
     :root {
@@ -14,52 +19,43 @@
       --text: #eef2f8;
       --muted: #9aa6b8;
       --accent: #ff7a1a;
-      --accent-2: #ffb347;
+      --teal: #2a9d8f;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: Segoe UI, system-ui, sans-serif;
+      font-family: system-ui, Segoe UI, sans-serif;
       background:
         radial-gradient(1200px 500px at 10% -10%, #2a1608 0%, transparent 55%),
-        radial-gradient(900px 400px at 100% 0%, #122033 0%, transparent 50%),
         var(--bg);
       color: var(--text);
     }
-    .wrap { max-width: 920px; margin: 0 auto; padding: 48px 20px 72px; }
-    .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 36px 20px 64px; }
+    .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
     .logo {
-      width: 42px; height: 42px; border-radius: 12px;
+      width: 48px; height: 48px; border-radius: 14px;
       background: linear-gradient(135deg, var(--accent), #c2410c);
       display: grid; place-items: center; font-weight: 800;
     }
-    h1 { font-size: clamp(28px, 5vw, 44px); line-height: 1.1; margin: 0 0 12px; }
-    .lead { color: var(--muted); font-size: 18px; max-width: 640px; margin: 0 0 28px; }
-    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
+    h1 { font-size: clamp(28px, 7vw, 42px); line-height: 1.1; margin: 0 0 12px; }
+    .lead { color: var(--muted); font-size: 17px; margin: 0 0 24px; }
     .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      min-height: 48px; padding: 0 20px; border-radius: 12px;
-      font-weight: 700; text-decoration: none; border: 1px solid transparent;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 52px; padding: 0 20px; border-radius: 14px;
+      font-weight: 800; text-decoration: none; border: 1px solid transparent;
+      font-size: 16px; margin: 0 0 12px; width: 100%; cursor: pointer;
+      font-family: inherit;
     }
     .btn-primary { background: var(--accent); color: #1a0b00; }
+    .btn-teal { background: var(--teal); color: #071412; }
     .btn-ghost { background: #1c2230; color: var(--text); border-color: var(--line); }
-    .meta { color: var(--muted); font-size: 14px; margin-bottom: 36px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .hint { color: var(--muted); font-size: 14px; line-height: 1.5; }
     .card {
       background: var(--panel); border: 1px solid var(--line);
-      border-radius: 16px; padding: 16px 18px;
+      border-radius: 16px; padding: 16px 18px; margin-top: 20px;
     }
-    .card h3 { margin: 0 0 6px; font-size: 15px; }
-    .card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.45; }
-    .steps { margin-top: 36px; }
-    .steps ol { color: var(--muted); padding-left: 18px; }
-    .steps li { margin: 8px 0; }
-    code {
-      background: #0f131b; border: 1px solid var(--line);
-      border-radius: 8px; padding: 2px 6px; color: #dbe7ff;
-    }
-    .ok { margin-top: 28px; color: #86efac; font-size: 14px; line-height: 1.5; }
+    #ios { display: none; }
   </style>
 </head>
 <body>
@@ -68,30 +64,46 @@
       <div class="logo">MS</div>
       <div>Mobile Studio Pro</div>
     </div>
-    <h1>Signed Windows studio</h1>
-    <p class="lead">Download the recording, mixing, and mastering app. The file is Authenticode-signed, hashed, and carries a Windows identity so SmartScreen can recognize the publisher.</p>
-    <div class="actions">
-      <a class="btn btn-primary" href="MobileStudioPro-windows.zip">Download signed zip</a>
-      <a class="btn btn-ghost" href="MobileStudioPro.exe" download="MobileStudioPro.exe">Download exe</a>
-      <a class="btn btn-ghost" href="MobileStudioPro.cer" download="MobileStudioPro.cer">Publisher certificate</a>
+    <h1>Install the studio on your phone</h1>
+    <p class="lead">Open this page on your phone, tap Install, and record vocals over karaoke with mix and studio reverb — no Play Store needed.</p>
+    <a class="btn btn-primary" href="studio/">Open studio on this phone</a>
+    <button class="btn btn-teal" id="btnInstall" type="button">Install app</button>
+    <p class="hint" id="androidHint">Android: tap <strong>Install app</strong>, then Open. The studio icon appears on your home screen.</p>
+    <div class="card" id="ios">
+      <strong>iPhone / iPad</strong>
+      <p class="hint">Safari → Share button → <strong>Add to Home Screen</strong> → Add. Then open <em>Studio Pro</em> from your home screen.</p>
     </div>
-    <p class="meta">Windows 10 / 11 · signed Authenticode SHA256 · no admin rights · no telemetry</p>
-    <div class="grid">
-      <article class="card"><h3>Identity</h3><p>Version info, icon, and asInvoker manifest so Windows treats it as a normal desktop app, not an unknown dropper.</p></article>
-      <article class="card"><h3>Signature</h3><p>Signed with the Mobile Studio Pro publisher cert. Import the .cer into Trusted Publishers if Windows still asks.</p></article>
-      <article class="card"><h3>Integrity</h3><p>SHA256 is published in SHA256SUMS.txt. The saved installer checks the hash before it copies the file.</p></article>
-      <article class="card"><h3>Hardening</h3><p>ASLR, DEP, high-entropy VA, stack protector. Runs as the current user, never as Administrator.</p></article>
-    </div>
-    <section class="steps">
-      <h2>Install without SmartScreen blocking</h2>
-      <ol>
-        <li>Download the <strong>signed zip</strong> (safer than a raw exe from the browser).</li>
-        <li>Extract <code>MobileStudioPro.exe</code>.</li>
-        <li>If Windows still warns, double-click <code>MobileStudioPro.cer</code> → Install Certificate → Current User → Place all certificates in <strong>Trusted Publishers</strong>.</li>
-        <li>Right-click the exe → Properties → tick <strong>Unblock</strong> → OK, then run it.</li>
-      </ol>
-    </section>
-    <p class="ok">This PC can also trust the publisher automatically with the local sign-and-trust script. Microsoft SmartScreen cloud reputation for new publishers still needs a paid Authenticode certificate (DigiCert / Azure Trusted Signing) before every other computer on the internet stops warning.</p>
+    <a class="btn btn-ghost" href="windows.html">Windows desktop app</a>
   </main>
+  <script>
+    if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js");
+    const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    if (ios) {
+      document.getElementById("ios").style.display = "block";
+      document.getElementById("androidHint").style.display = "none";
+    }
+    let deferred = null;
+    window.addEventListener("beforeinstallprompt", (e) => {
+      e.preventDefault();
+      deferred = e;
+    });
+    document.getElementById("btnInstall").onclick = async () => {
+      if (deferred) {
+        deferred.prompt();
+        await deferred.userChoice;
+        deferred = null;
+        return;
+      }
+      if (ios) {
+        document.getElementById("ios").scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+      location.href = "studio/";
+    };
+    const phone = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
+    if (phone && !window.matchMedia("(display-mode: standalone)").matches) {
+      /* stay on install page so the user can tap Install */
+    }
+  </script>
 </body>
 </html>
