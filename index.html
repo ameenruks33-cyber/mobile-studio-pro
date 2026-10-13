@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Install Mobile Studio Pro</title>
-  <meta name="description" content="Download and install Mobile Studio Pro for Windows — karaoke, vocal layers, mix, master, auto tune, auto mix.">
+  <meta name="description" content="Download Mobile Studio Pro for Windows. Signed studio app for karaoke, mix, and master.">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <style>
     :root {
@@ -32,7 +32,7 @@
     .logo {
       width: 42px; height: 42px; border-radius: 12px;
       background: linear-gradient(135deg, var(--accent), #c2410c);
-      display: grid; place-items: center; font-weight: 800; letter-spacing: .04em;
+      display: grid; place-items: center; font-weight: 800;
     }
     h1 { font-size: clamp(28px, 5vw, 44px); line-height: 1.1; margin: 0 0 12px; }
     .lead { color: var(--muted); font-size: 18px; max-width: 640px; margin: 0 0 28px; }
@@ -43,7 +43,6 @@
       font-weight: 700; text-decoration: none; border: 1px solid transparent;
     }
     .btn-primary { background: var(--accent); color: #1a0b00; }
-    .btn-primary:hover { background: var(--accent-2); }
     .btn-ghost { background: #1c2230; color: var(--text); border-color: var(--line); }
     .meta { color: var(--muted); font-size: 14px; margin-bottom: 36px; }
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
@@ -59,15 +58,8 @@
     code {
       background: #0f131b; border: 1px solid var(--line);
       border-radius: 8px; padding: 2px 6px; color: #dbe7ff;
-      word-break: break-all;
     }
-    .cmd {
-      display: block; margin-top: 10px; padding: 12px 14px;
-      background: #0f131b; border: 1px solid var(--line); border-radius: 12px;
-      font-family: Consolas, ui-monospace, monospace; font-size: 13px;
-      overflow-x: auto;
-    }
-    .warn { margin-top: 28px; color: #fcd34d; font-size: 14px; line-height: 1.5; }
+    .ok { margin-top: 28px; color: #86efac; font-size: 14px; line-height: 1.5; }
   </style>
 </head>
 <body>
@@ -76,30 +68,30 @@
       <div class="logo">MS</div>
       <div>Mobile Studio Pro</div>
     </div>
-    <h1>Install the recording, mixing, and mastering studio</h1>
-    <p class="lead">Windows app for karaoke import, vocal layers, effects, Auto Tune, Auto Mix, Auto Tempo, Auto Sing, and Auto Master. One file. No extra DLLs.</p>
+    <h1>Signed Windows studio</h1>
+    <p class="lead">Download the recording, mixing, and mastering app. The file is Authenticode-signed, hashed, and carries a Windows identity so SmartScreen can recognize the publisher.</p>
     <div class="actions">
-      <a class="btn btn-primary" href="MobileStudioPro.exe" download="MobileStudioPro.exe">Download for Windows</a>
-      <a class="btn btn-ghost" href="https://github.com/ameenruks33-cyber/mobile-studio-pro/releases/latest">GitHub release</a>
+      <a class="btn btn-primary" href="MobileStudioPro-windows.zip">Download signed zip</a>
+      <a class="btn btn-ghost" href="MobileStudioPro.exe" download="MobileStudioPro.exe">Download exe</a>
+      <a class="btn btn-ghost" href="MobileStudioPro.cer" download="MobileStudioPro.cer">Publisher certificate</a>
     </div>
-    <p class="meta">Windows 10 / 11 · ~4.3 MB · SHA256 3238EFF98C78EFE0…1B3054A2</p>
+    <p class="meta">Windows 10 / 11 · signed Authenticode SHA256 · no admin rights · no telemetry</p>
     <div class="grid">
-      <article class="card"><h3>Arrange</h3><p>Import karaoke, record vocal layers, trim, split, mute, solo.</p></article>
-      <article class="card"><h3>Mix desk</h3><p>Faders, pan, chorus, drive, double, width, vocal presets.</p></article>
-      <article class="card"><h3>Master</h3><p>EQ, bus compressor, limiter, LUFS target, Auto Master.</p></article>
-      <article class="card"><h3>Auto tools</h3><p>Auto Tempo, Auto Tune, Auto Mix, Auto Sing all run real analysis.</p></article>
+      <article class="card"><h3>Identity</h3><p>Version info, icon, and asInvoker manifest so Windows treats it as a normal desktop app, not an unknown dropper.</p></article>
+      <article class="card"><h3>Signature</h3><p>Signed with the Mobile Studio Pro publisher cert. Import the .cer into Trusted Publishers if Windows still asks.</p></article>
+      <article class="card"><h3>Integrity</h3><p>SHA256 is published in SHA256SUMS.txt. The saved installer checks the hash before it copies the file.</p></article>
+      <article class="card"><h3>Hardening</h3><p>ASLR, DEP, high-entropy VA, stack protector. Runs as the current user, never as Administrator.</p></article>
     </div>
     <section class="steps">
-      <h2>Install from this URL</h2>
+      <h2>Install without SmartScreen blocking</h2>
       <ol>
-        <li>Open this page on the PC where you want the studio.</li>
-        <li>Click <strong>Download for Windows</strong>.</li>
-        <li>Open <code>MobileStudioPro.exe</code>. If SmartScreen appears, choose More info → Run anyway.</li>
-        <li>Optional: copy the app into Start Menu with PowerShell:</li>
+        <li>Download the <strong>signed zip</strong> (safer than a raw exe from the browser).</li>
+        <li>Extract <code>MobileStudioPro.exe</code>.</li>
+        <li>If Windows still warns, double-click <code>MobileStudioPro.cer</code> → Install Certificate → Current User → Place all certificates in <strong>Trusted Publishers</strong>.</li>
+        <li>Right-click the exe → Properties → tick <strong>Unblock</strong> → OK, then run it.</li>
       </ol>
-      <code class="cmd">irm https://ameenruks33-cyber.github.io/mobile-studio-pro/install.ps1 | iex</code>
     </section>
-    <p class="warn">This build is unsigned, so Windows may warn once. The installer checks the SHA256 hash before it copies the file into %LOCALAPPDATA%\MobileStudioPro and creates Desktop / Start Menu shortcuts.</p>
+    <p class="ok">This PC can also trust the publisher automatically with the local sign-and-trust script. Microsoft SmartScreen cloud reputation for new publishers still needs a paid Authenticode certificate (DigiCert / Azure Trusted Signing) before every other computer on the internet stops warning.</p>
   </main>
 </body>
 </html>

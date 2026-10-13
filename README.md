@@ -4,8 +4,4 @@ Install from:
 
 **https://ameenruks33-cyber.github.io/mobile-studio-pro/**
 
-Windows 10/11. Download `MobileStudioPro.exe`, or run:
-
-```powershell
-irm https://ameenruks33-cyber.github.io/mobile-studio-pro/install.ps1 | iex
-```
+Download the signed zip, extract, and run `MobileStudioPro.exe`. If Windows SmartScreen still warns, install `MobileStudioPro.cer` into **Trusted Publishers**, then unblock the file in Properties.
